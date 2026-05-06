@@ -10,6 +10,14 @@ public static class PlayerInput
             "move_back"
         );
 
+    public static Vector2 CameraLook => 
+        Input.GetVector(
+            "camera_left",
+            "camera_right",
+            "camera_up",
+            "camera_down"
+        );
+
     public static bool JumpPressed =>
         Input.IsActionJustPressed("jump");
 }
