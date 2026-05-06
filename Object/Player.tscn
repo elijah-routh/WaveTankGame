@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dhsq1cio25516"]
+
+[ext_resource type="Script" uid="uid://dqkidhdcjxqas" path="res://Script/Player/PlayerCamera.cs" id="1_62nw6"]
+[ext_resource type="Script" uid="uid://ul7s8q45rop0" path="res://Script/Player/PlayerController.cs" id="1_l8tau"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jkgat"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_62nw6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l8tau"]
+
+[node name="PlayerRoot" type="Node3D" unique_id=920046093]
+
+[node name="PlayerBody" type="CharacterBody3D" parent="." unique_id=750631945 node_paths=PackedStringArray("CameraPivot")]
+script = ExtResource("1_l8tau")
+CameraPivot = NodePath("../CameraPivot")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerBody" unique_id=1318024319]
+mesh = SubResource("BoxMesh_jkgat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBody" unique_id=1285463699]
+shape = SubResource("BoxShape3D_62nw6")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1257778811 node_paths=PackedStringArray("Target")]
+transform = Transform3D(1, 0, 0, 0, 0.91363764, -0.40652943, 0, 0.40652943, 0.91363764, 0, 0, 0)
+script = ExtResource("1_62nw6")
+Target = NodePath("../PlayerBody")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=2023088979]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+shape = SubResource("SphereShape3D_l8tau")
+spring_length = 8.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=1357364569]
+current = true
