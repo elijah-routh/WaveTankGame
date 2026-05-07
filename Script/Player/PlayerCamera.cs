@@ -11,6 +11,10 @@ public partial class PlayerCamera : Node3D
     [Export] public float MaxPitch = 45f;
     [Export] public Vector3 Offset = new Vector3(0, 1.5f, 0);
 
+    [Export] public SpringArm3D SpringArm;
+    [Export] public float MinSpringLength = 1.0f;
+    //[Export] public float MaxSpringLength = 4.0f;
+
     private Vector2 _cameraInput = Vector2.Zero;
 
     public override void _Ready()
@@ -74,5 +78,14 @@ public partial class PlayerCamera : Node3D
 
         // Clear mouse delta
         _cameraInput = Vector2.Zero;
+
+        //min camera zoom
+        if (SpringArm != null)
+        {
+            SpringArm.SpringLength = Mathf.Max(
+                SpringArm.SpringLength,
+                MinSpringLength
+            );
+        }
     }
 }

@@ -20,4 +20,7 @@ public static class PlayerInput
 
     public static bool JumpPressed =>
         Input.IsActionJustPressed("jump");
+
+    public static bool PausePressed =>
+        Input.IsActionJustPressed("pause");
 }

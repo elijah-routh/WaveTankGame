@@ -2,6 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://bx6yb7u7qv0cb" path="res://Object/block.tscn" id="1_nm00w"]
 [ext_resource type="PackedScene" uid="uid://dhsq1cio25516" path="res://Object/Player.tscn" id="1_qqs8u"]
+[ext_resource type="PackedScene" uid="uid://bk6vsvvvq2041" path="res://Scene/hud.tscn" id="3_jqghn"]
+[ext_resource type="PackedScene" uid="uid://bbdhynmtewp4j" path="res://Scene/menu_pause.tscn" id="4_yh8nw"]
+[ext_resource type="PackedScene" uid="uid://d0rhomlily6un" path="res://Object/star.tscn" id="5_ttjy2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_myfh2"]
 size = Vector3(20, 0.25, 15)
@@ -12,6 +15,9 @@ size = Vector3(20, 0.25, 15)
 [node name="Level1" type="Node3D" unique_id=3756542]
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1581676714]
+transform = Transform3D(2.660039, 0, 0, 0, 1, 0, 0, 0, 3.6029806, 0, 0, 0)
+collision_layer = 2
+collision_mask = 13
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1654012833]
@@ -40,3 +46,33 @@ transform = Transform3D(1, 0, 0, 0, 0.6873664, -0.7263108, 0, 0.7263108, 0.68736
 
 [node name="Block4" parent="Blocks" unique_id=11823946 instance=ExtResource("1_nm00w")]
 transform = Transform3D(1, 0, 0, 0, 0.6873664, -0.7263108, 0, 0.7263108, 0.6873664, -2.0143027, 7.475816, 0.27225262)
+
+[node name="HUD" parent="." unique_id=1896632546 instance=ExtResource("3_jqghn")]
+
+[node name="menu_pause" parent="." unique_id=559940024 instance=ExtResource("4_yh8nw")]
+
+[node name="Stars" type="Node3D" parent="." unique_id=1836294982]
+
+[node name="Star" parent="Stars" unique_id=1889842609 instance=ExtResource("5_ttjy2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.42551, 0.8320997, 0)
+
+[node name="Star2" parent="Stars" unique_id=74611116 instance=ExtResource("5_ttjy2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.427605, 0.8320997, 11.840833)
+
+[node name="Star3" parent="Stars" unique_id=1905166731 instance=ExtResource("5_ttjy2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.658562, 0.8320997, -14.612177)
+
+[node name="Star4" parent="Stars" unique_id=1085089053 instance=ExtResource("5_ttjy2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.962822, 0.8320997, -18.435524)
+
+[node name="Star5" parent="Stars" unique_id=1807536302 instance=ExtResource("5_ttjy2")]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 3.1669502, 0.8320997, 10.421696)
+
+[node name="Star6" parent="Stars" unique_id=1859092972 instance=ExtResource("5_ttjy2")]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -2.7534657, 0.8320997, 20.676157)
+
+[node name="Star7" parent="Stars" unique_id=1176489495 instance=ExtResource("5_ttjy2")]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 23.965296, 0.8320997, 5.556938)
+
+[node name="Star8" parent="Stars" unique_id=2138528340 instance=ExtResource("5_ttjy2")]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 18.04488, 0.8320997, 15.8114)
