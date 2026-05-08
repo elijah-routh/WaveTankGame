@@ -12,12 +12,18 @@ size = Vector3(20, 0.25, 15)
 [sub_resource type="BoxShape3D" id="BoxShape3D_nm00w"]
 size = Vector3(20, 0.25, 15)
 
+[sub_resource type="BoxMesh" id="BoxMesh_ttjy2"]
+size = Vector3(5, 5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pg68k"]
+size = Vector3(5, 5, 0.5)
+
 [node name="Level1" type="Node3D" unique_id=3756542]
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1581676714]
 transform = Transform3D(2.660039, 0, 0, 0, 1, 0, 0, 0, 3.6029806, 0, 0, 0)
 collision_layer = 2
-collision_mask = 13
+collision_mask = 141
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1654012833]
@@ -26,8 +32,20 @@ mesh = SubResource("BoxMesh_myfh2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1531495891]
 shape = SubResource("BoxShape3D_nm00w")
 
+[node name="Wall" type="StaticBody3D" parent="." unique_id=736240808]
+transform = Transform3D(-1.2331262, 0, 3.1924498, 0, 1, 0, -2.3569486, 0, -1.6702498, 13.720205, 2.3816967, 0.74775696)
+collision_layer = 2
+collision_mask = 141
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall" unique_id=2041651296]
+mesh = SubResource("BoxMesh_ttjy2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall" unique_id=48732436]
+shape = SubResource("BoxShape3D_pg68k")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1132189501]
-transform = Transform3D(0.8184306, 0.4749516, -0.32340732, 0.57460535, -0.67649025, 0.46064043, 0, -0.5628338, -0.8265701, -2.8392425, 8.611301, -1.946168)
+transform = Transform3D(0.8184306, 0.4749516, -0.32340732, 0.57460535, -0.67649025, 0.46064043, 0, -0.5628338, -0.8265701, -2.8392425, 11.6844, -8.221599)
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=2108732643 instance=ExtResource("1_qqs8u")]
@@ -55,24 +73,32 @@ transform = Transform3D(1, 0, 0, 0, 0.6873664, -0.7263108, 0, 0.7263108, 0.68736
 
 [node name="Star" parent="Stars" unique_id=1889842609 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.42551, 0.8320997, 0)
+Amount = null
 
 [node name="Star2" parent="Stars" unique_id=74611116 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.427605, 0.8320997, 11.840833)
+Amount = null
 
 [node name="Star3" parent="Stars" unique_id=1905166731 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.658562, 0.8320997, -14.612177)
+Amount = null
 
 [node name="Star4" parent="Stars" unique_id=1085089053 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.962822, 0.8320997, -18.435524)
+Amount = null
 
 [node name="Star5" parent="Stars" unique_id=1807536302 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 3.1669502, 0.8320997, 10.421696)
+Amount = null
 
 [node name="Star6" parent="Stars" unique_id=1859092972 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -2.7534657, 0.8320997, 20.676157)
+Amount = null
 
 [node name="Star7" parent="Stars" unique_id=1176489495 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 23.965296, 0.8320997, 5.556938)
+Amount = null
 
 [node name="Star8" parent="Stars" unique_id=2138528340 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 18.04488, 0.8320997, 15.8114)
+Amount = null

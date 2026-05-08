@@ -1,0 +1,10 @@
+[gd_resource type="Resource" format=3 uid="uid://co8x08kedqq8o"]
+
+[ext_resource type="PackedScene" uid="uid://dsujyhyva10i" path="res://Script/Weapon/Data/bullet.tscn" id="1_i0vh2"]
+[ext_resource type="Script" uid="uid://bhmplsdod70vm" path="res://Script/Weapon/WeaponData.cs" id="1_whlg1"]
+
+[resource]
+script = ExtResource("1_whlg1")
+ProjectileScene = ExtResource("1_i0vh2")
+BulletSpeed = 20.0
+metadata/_custom_type_script = "uid://bhmplsdod70vm"

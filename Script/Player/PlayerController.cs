@@ -4,6 +4,8 @@ public partial class PlayerController : CharacterBody3D
 {
     [Export] public Node3D CameraPivot;
     [Export] public Node3D TurretPivot;
+    [Export] public Node3D BarrelPivot;
+
 
     private PlayerMovement _movement =
         new PlayerMovement();
@@ -25,6 +27,7 @@ public partial class PlayerController : CharacterBody3D
         MoveAndSlide();
 
         UpdateTurretFacing();
+        UpdateBarrelFacing();
     }
 
     private void UpdateTurretFacing()
@@ -35,5 +38,15 @@ public partial class PlayerController : CharacterBody3D
         Vector3 turretRotation = TurretPivot.GlobalRotation;
         turretRotation.Y = CameraPivot.GlobalRotation.Y;
         TurretPivot.GlobalRotation = turretRotation;
+    }
+
+    private void UpdateBarrelFacing()
+    {
+        if (BarrelPivot == null || CameraPivot == null)
+            return;
+
+        Vector3 barrelRotation = BarrelPivot.GlobalRotation;
+        barrelRotation.X = CameraPivot.GlobalRotation.X;
+        BarrelPivot.GlobalRotation = barrelRotation;
     }
 }
