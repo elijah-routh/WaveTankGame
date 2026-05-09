@@ -22,6 +22,7 @@ project/assembly_name="TankAndBoat"
 [global_group]
 
 player_inventory=""
+player=""
 
 [input]
 

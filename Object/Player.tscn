@@ -20,7 +20,7 @@
 
 [node name="PlayerRoot" type="Node3D" unique_id=920046093]
 
-[node name="PlayerBody" type="CharacterBody3D" parent="." unique_id=750631945 node_paths=PackedStringArray("CameraPivot", "TurretPivot", "BarrelPivot")]
+[node name="PlayerBody" type="CharacterBody3D" parent="." unique_id=750631945 node_paths=PackedStringArray("CameraPivot", "TurretPivot", "BarrelPivot") groups=["player"]]
 collision_mask = 14
 script = ExtResource("1_l8tau")
 CameraPivot = NodePath("../CameraPivot")

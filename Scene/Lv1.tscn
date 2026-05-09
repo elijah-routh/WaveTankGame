@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bk6vsvvvq2041" path="res://Scene/hud.tscn" id="3_jqghn"]
 [ext_resource type="PackedScene" uid="uid://bbdhynmtewp4j" path="res://Scene/menu_pause.tscn" id="4_yh8nw"]
 [ext_resource type="PackedScene" uid="uid://d0rhomlily6un" path="res://Object/star.tscn" id="5_ttjy2"]
+[ext_resource type="PackedScene" uid="uid://dxsevhhuvx4u" path="res://Object/enemy.tscn" id="6_pg68k"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_myfh2"]
 size = Vector3(20, 0.25, 15)
@@ -73,32 +74,29 @@ transform = Transform3D(1, 0, 0, 0, 0.6873664, -0.7263108, 0, 0.7263108, 0.68736
 
 [node name="Star" parent="Stars" unique_id=1889842609 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.42551, 0.8320997, 0)
-Amount = null
 
 [node name="Star2" parent="Stars" unique_id=74611116 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.427605, 0.8320997, 11.840833)
-Amount = null
 
 [node name="Star3" parent="Stars" unique_id=1905166731 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.658562, 0.8320997, -14.612177)
-Amount = null
 
 [node name="Star4" parent="Stars" unique_id=1085089053 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.962822, 0.8320997, -18.435524)
-Amount = null
 
 [node name="Star5" parent="Stars" unique_id=1807536302 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 3.1669502, 0.8320997, 10.421696)
-Amount = null
 
 [node name="Star6" parent="Stars" unique_id=1859092972 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -2.7534657, 0.8320997, 20.676157)
-Amount = null
 
 [node name="Star7" parent="Stars" unique_id=1176489495 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 23.965296, 0.8320997, 5.556938)
-Amount = null
 
 [node name="Star8" parent="Stars" unique_id=2138528340 instance=ExtResource("5_ttjy2")]
 transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 18.04488, 0.8320997, 15.8114)
-Amount = null
+
+[node name="Enemies" type="Node3D" parent="." unique_id=659721720]
+
+[node name="EnemyBody" parent="Enemies" unique_id=773946387 instance=ExtResource("6_pg68k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0311747, 6.268075, 8.216606)

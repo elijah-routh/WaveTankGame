@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dxsevhhuvx4u"]
+
+[ext_resource type="Script" uid="uid://dqeb6o8xxjw4" path="res://Script/Enemy/TestEnemy.cs" id="1_wtueg"]
+[ext_resource type="Resource" uid="uid://cpctkfdnnf708" path="res://Script/Enemy/Data/TestEnemy1.tres" id="2_c6j6f"]
+[ext_resource type="Script" uid="uid://dblhsflas6dvv" path="res://Script/Entity/MoveComponent.cs" id="2_wg2dq"]
+[ext_resource type="Script" uid="uid://cgiws4dpe64rt" path="res://Script/Entity/HealthComponent.cs" id="3_c6j6f"]
+[ext_resource type="Script" uid="uid://bal6jflxl81xj" path="res://Script/Enemy/EnemyController.cs" id="4_46ks3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7xaro"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7k104"]
+
+[node name="EnemyBody" type="CharacterBody3D" unique_id=773946387]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_wtueg")
+Data = ExtResource("2_c6j6f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1041290374]
+shape = SubResource("CapsuleShape3D_7xaro")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2079214735]
+mesh = SubResource("CapsuleMesh_7k104")
+
+[node name="MoveComponent" type="Node" parent="." unique_id=1518310129]
+script = ExtResource("2_wg2dq")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=839736057]
+script = ExtResource("3_c6j6f")
+DestroyOwnerOnDeath = null
+
+[node name="EnemyController" type="Node" parent="." unique_id=309207712]
+script = ExtResource("4_46ks3")
