@@ -2,10 +2,10 @@ using Godot;
 
 public class PlayerMovement
 {
-    public float MoveSpeed = 6.0f;
-    public float Acceleration = 20.0f;
+    public float MoveSpeed = 12.0f;
+    public float Acceleration = 10.0f;
     public float Deceleration = 16.0f;
-    public float JumpVelocity = 4.5f;
+    public float JumpVelocity = 8.5f;
 
     public void ApplyGravity(CharacterBody3D body, float delta)
     {
