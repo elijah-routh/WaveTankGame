@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="TankAndBoat"
-run/main_scene="uid://yi0yh3ciby6i"
+run/main_scene="uid://bup2b7ptt64kl"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
