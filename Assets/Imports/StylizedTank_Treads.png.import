@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0lg6chckqp35"
-path.s3tc="res://.godot/imported/texture_04.png-912ae3d2237417347901c8f2f311b2b7.s3tc.ctex"
+uid="uid://panb4ceyh21w"
+path.s3tc="res://.godot/imported/StylizedTank_Treads.png-9b407b7f846830e5ed5925bed452a6cb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "69ce4c2e1ef44f843f344bd78c7bc707"
+}
 
 [deps]
 
-source_file="res://Trenchbroom/textures/kenney_prototypeTextures/PNG/Dark/texture_04.png"
-dest_files=["res://.godot/imported/texture_04.png-912ae3d2237417347901c8f2f311b2b7.s3tc.ctex"]
+source_file="res://Assets/Imports/StylizedTank_Treads.png"
+dest_files=["res://.godot/imported/StylizedTank_Treads.png-9b407b7f846830e5ed5925bed452a6cb.s3tc.ctex"]
 
 [params]
 
