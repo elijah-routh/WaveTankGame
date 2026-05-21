@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bk6vsvvvq2041" path="res://Scene/hud.tscn" id="3_jqghn"]
 [ext_resource type="PackedScene" uid="uid://bbdhynmtewp4j" path="res://Scene/menu_pause.tscn" id="4_yh8nw"]
 [ext_resource type="PackedScene" uid="uid://d0rhomlily6un" path="res://Object/star.tscn" id="5_ttjy2"]
-[ext_resource type="PackedScene" uid="uid://dli6ligenhpeg" path="res://Assets/Imports/stylized_tank.tscn" id="6_aafx7"]
+[ext_resource type="PackedScene" uid="uid://bcpcyrk5h032x" path="res://warthog.tscn" id="6_aafx7"]
 [ext_resource type="PackedScene" uid="uid://dxsevhhuvx4u" path="res://Object/enemy.tscn" id="6_pg68k"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_myfh2"]
@@ -98,5 +98,5 @@ transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 18.04488
 [node name="EnemyBody" parent="Enemies" unique_id=773946387 instance=ExtResource("6_pg68k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0311747, 6.268075, 8.216606)
 
-[node name="Tank" parent="." unique_id=1992546528 instance=ExtResource("6_aafx7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4002347, 0)
+[node name="Warthog" parent="." unique_id=1653131424 instance=ExtResource("6_aafx7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.065002, 1.9417574, 0)
