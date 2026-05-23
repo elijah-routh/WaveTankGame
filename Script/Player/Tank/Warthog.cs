@@ -9,22 +9,36 @@ public partial class Warthog : VehicleBody3D
     [Export] public VehicleWheel3D RearRightWheel;
 
     [ExportGroup("Steering")]
-    [Export] public float MaxSteerAngle = 0.45f;
-    [Export] public float SteerSpeed = 6f;
+    [Export] public float MaxSteerAngle = 0.6f;
+    [Export] public float SteerSpeed = 10.0f;
 
     [ExportGroup("Suspension")]
-    [Export] public float WheelFriction = 10.5f;
-    [Export] public float SuspensionStiffness = 0.0f;
+    [Export] public float WheelFriction = 20.0f;
+    [Export] public float SuspensionStiffness = 25.0f;
 
     [ExportGroup("Engine")]
-    [Export] public float Acceleration = 1200f;
-    [Export] public float MaxSpeed = 30f;
+    [Export] public float Acceleration = 1200.0f;
+    [Export] public float MaxSpeed = 30.0f;
+    [Export] public bool UsePositiveZForward = true;
+
+    [ExportGroup("Grip")]
+    [Export] public float WheelSideGrip = 1.0f;
+
+    [ExportGroup("Stability")]
+    [Export] public Vector3 CustomCenterOfMass = new(0, -1.0f, 0);
+    [Export] public float LinearDamping = 1.5f;
+    [Export] public float AngularDamping = 2.5f;
+
+    [ExportGroup("Air Control")]
+    [Export] public float GroundLinearDamping = 1.0f;
+    [Export] public float AirLinearDamping = 0.05f;
+    [Export] public float GroundAngularDamping = 2.0f;
+    [Export] public float AirAngularDamping = 0.25f;
 
     private float _throttle;
+    private float _steerInput;
 
     private VehicleWheel3D[] _wheels;
-
-    private float _steerInput;
 
     public override void _Ready()
     {
@@ -36,18 +50,29 @@ public partial class Warthog : VehicleBody3D
             RearRightWheel
         ];
 
+        CenterOfMassMode = CenterOfMassModeEnum.Custom;
+        CenterOfMass = CustomCenterOfMass;
+
+        LinearDamp = LinearDamping;
+        AngularDamp = AngularDamping;
+
         ApplyWheelSettings();
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        _throttle = Input.GetAxis("move_back", "move_forward");
+        float physicsDelta = (float)delta;
 
-        HandleEngineVelocity();
+        _throttle =
+            Input.GetAxis("drive_back", "drive_forward");
 
-        _steerInput = Input.GetAxis("move_right", "move_left");
+        _steerInput =
+            Input.GetAxis("move_right", "move_left");
 
-        HandleSteering((float)delta);
+        UpdateDamping();
+        HandleEngineForce();
+        HandleSteering(physicsDelta);
+        ApplySideGrip();
     }
 
     private void ApplyWheelSettings()
@@ -62,38 +87,119 @@ public partial class Warthog : VehicleBody3D
         }
     }
 
-    private void HandleEngineVelocity()
+    private void UpdateDamping()
     {
-        float speed = LinearVelocity.Length();
+        if (HasGroundContact())
+        {
+            LinearDamp = GroundLinearDamping;
+            AngularDamp = GroundAngularDamping;
+        }
+        else
+        {
+            LinearDamp = AirLinearDamping;
+            AngularDamp = AirAngularDamping;
+        }
+    }
+
+    private void HandleEngineForce()
+    {
+        if (!HasGroundContact())
+            return;
+
+        float speed =
+            Mathf.Abs(LinearVelocity.Dot(GetForwardDirection()));
 
         float speedFactor =
             1.0f - Mathf.Min(speed / MaxSpeed, 1.0f);
 
-        Vector3 forward =
-            -GlobalTransform.Basis.Z;
-
         Vector3 force =
-            forward * Acceleration * _throttle * speedFactor;
+            GetForwardDirection() *
+            Acceleration *
+            _throttle *
+            speedFactor;
 
         ApplyCentralForce(force);
     }
 
-    private void HandleSteering(float delta)
+    private Vector3 GetForwardDirection()
     {
-        float targetSteer = _steerInput * MaxSteerAngle;
+        if (UsePositiveZForward)
+            return GlobalTransform.Basis.Z;
 
-        FrontLeftWheel.Steering = Mathf.MoveToward(
-            FrontLeftWheel.Steering,
-            targetSteer,
-            SteerSpeed * delta
-        );
-
-        FrontRightWheel.Steering = Mathf.MoveToward(
-            FrontRightWheel.Steering,
-            targetSteer,
-            SteerSpeed * delta
-        );
+        return -GlobalTransform.Basis.Z;
     }
 
-    
+    private void HandleSteering(float delta)
+    {
+        if (FrontLeftWheel == null ||
+            FrontRightWheel == null)
+            return;
+
+        float targetSteer =
+            _steerInput * MaxSteerAngle;
+
+        FrontLeftWheel.Steering =
+            Mathf.MoveToward(
+                FrontLeftWheel.Steering,
+                targetSteer,
+                SteerSpeed * delta
+            );
+
+        FrontRightWheel.Steering =
+            Mathf.MoveToward(
+                FrontRightWheel.Steering,
+                targetSteer,
+                SteerSpeed * delta
+            );
+    }
+
+    private void ApplySideGrip()
+    {
+        foreach (VehicleWheel3D wheel in _wheels)
+        {
+            ApplyWheelSideGrip(wheel);
+        }
+    }
+
+    private void ApplyWheelSideGrip(VehicleWheel3D wheel)
+    {
+        if (wheel == null)
+            return;
+
+        if (!wheel.IsInContact())
+            return;
+
+        Vector3 sideDirection =
+            wheel.GlobalTransform.Basis.X;
+
+        Vector3 wheelOffset =
+            wheel.GlobalPosition - GlobalPosition;
+
+        Vector3 wheelVelocity =
+            LinearVelocity +
+            AngularVelocity.Cross(wheelOffset);
+
+        float sideVelocity =
+            sideDirection.Dot(wheelVelocity);
+
+        float gravity =
+            ProjectSettings
+            .GetSetting("physics/3d/default_gravity")
+            .AsSingle();
+
+        Vector3 gripForce =
+            -sideDirection *
+            sideVelocity *
+            WheelSideGrip *
+            ((Mass * gravity) / 4.0f);
+
+        ApplyForce(gripForce, wheelOffset);
+    }
+
+    private bool HasGroundContact()
+    {
+        return
+            RearLeftWheel.IsInContact() ||
+            RearRightWheel.IsInContact();
+    }
 }

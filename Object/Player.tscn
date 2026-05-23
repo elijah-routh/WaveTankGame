@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dqkidhdcjxqas" path="res://Script/Player/PlayerCamera.cs" id="1_62nw6"]
 [ext_resource type="Script" uid="uid://ul7s8q45rop0" path="res://Script/Player/PlayerController.cs" id="1_l8tau"]
 [ext_resource type="Material" uid="uid://bbgyd8jaflfkp" path="res://Art/tankAlpha.tres" id="2_e5oj2"]
+[ext_resource type="Script" uid="uid://chqufperkix03" path="res://Script/Weapon/TurretController.cs" id="3_4g26t"]
 [ext_resource type="Material" uid="uid://1socim47qhxu" path="res://Art/tankGunAlpha.tres" id="3_rjotr"]
 [ext_resource type="Script" uid="uid://chmvkchg48xg7" path="res://Script/Weapon/WeaponController.cs" id="5_car0r"]
 [ext_resource type="Script" uid="uid://bw8e2f22ssydd" path="res://Script/Player/PlayerInventory.cs" id="5_tfkfv"]
@@ -22,12 +23,10 @@
 
 [node name="PlayerRoot" type="Node3D" unique_id=920046093]
 
-[node name="PlayerBody" type="CharacterBody3D" parent="." unique_id=750631945 node_paths=PackedStringArray("CameraPivot", "TurretPivot", "BarrelPivot", "Movement", "GroundAlignment") groups=["player"]]
+[node name="PlayerBody" type="CharacterBody3D" parent="." unique_id=750631945 node_paths=PackedStringArray("CameraPivot", "Movement", "GroundAlignment") groups=["player"]]
 collision_mask = 14
 script = ExtResource("1_l8tau")
 CameraPivot = NodePath("../CameraPivot")
-TurretPivot = NodePath("VisualNode/TurretPivot")
-BarrelPivot = NodePath("VisualNode/TurretPivot/MeshInstance3D/BarrelPivot")
 Movement = NodePath("../Move")
 GroundAlignment = NodePath("../GroundAlign")
 
@@ -40,7 +39,11 @@ shape = SubResource("BoxShape3D_62nw6")
 mesh = SubResource("BoxMesh_jkgat")
 surface_material_override/0 = ExtResource("2_e5oj2")
 
-[node name="TurretPivot" type="Node3D" parent="PlayerBody/VisualNode" unique_id=1225034893]
+[node name="TurretPivot" type="Node3D" parent="PlayerBody/VisualNode" unique_id=1225034893 node_paths=PackedStringArray("CameraPivot", "TurretPivot", "BarrelPivot")]
+script = ExtResource("3_4g26t")
+CameraPivot = NodePath("../../../CameraPivot")
+TurretPivot = NodePath(".")
+BarrelPivot = NodePath("MeshInstance3D/BarrelPivot")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerBody/VisualNode/TurretPivot" unique_id=1211883956]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0.6, 0)
