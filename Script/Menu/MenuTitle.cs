@@ -11,6 +11,6 @@ public partial class MenuTitle : Node
 
     private void OnStartButtonPressed()
     {
-        GetTree().ChangeSceneToFile("res://Levels/Lv1.tscn");
+        GetTree().ChangeSceneToFile("res://Levels/test_map.tscn");
     }
 }

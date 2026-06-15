@@ -6,6 +6,15 @@
 "wad" ""
 "classname" "worldspawn"
 "_tb_mod" "Trenchbroom"
+// brush 0
+{
+( -3184 1056 -16 ) ( -3184 1057 -16 ) ( -3184 1056 -15 ) kenney_prototypeTextures/PNG/Light/texture_11 [ 0 -1 0 0 ] [ 0 0 -1 16 ] 270 1 1
+( -160 896 -16 ) ( -160 896 -15 ) ( -159 896 -16 ) kenney_prototypeTextures/PNG/Light/texture_11 [ 1 0 0 0 ] [ 0 0 -1 16 ] 0 1 1
+( -160 1056 -16 ) ( -159 1056 -16 ) ( -160 1057 -16 ) kenney_prototypeTextures/PNG/Light/texture_11 [ -1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 16 1168 0 ) ( 16 1169 0 ) ( 17 1168 0 ) kenney_prototypeTextures/PNG/Light/texture_11 [ 1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 16 5040 0 ) ( 17 5040 0 ) ( 16 5040 1 ) kenney_prototypeTextures/PNG/Light/texture_11 [ -1 0 0 0 ] [ 0 0 -1 16 ] 270 1 1
+( 992 1168 0 ) ( 992 1168 1 ) ( 992 1169 0 ) kenney_prototypeTextures/PNG/Light/texture_11 [ 0 1 0 0 ] [ 0 0 -1 16 ] 0 1 1
+}
 }
 // entity 1
 {

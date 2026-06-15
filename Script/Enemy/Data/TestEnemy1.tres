@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_byxcp")
-MoveSpeed = 2.5
+MoveSpeed = 7.0
 metadata/_custom_type_script = "uid://cmarmoyfixg3k"

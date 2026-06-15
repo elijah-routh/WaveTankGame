@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://54c8fol816xe" path="res://Script/Player/Tank/Warthog.cs" id="1_55fhy"]
 [ext_resource type="Script" uid="uid://dqkidhdcjxqas" path="res://Script/Player/PlayerCamera.cs" id="2_55fhy"]
+[ext_resource type="Material" uid="uid://oalp035575kt" path="res://Trenchbroom/textures/kenney_prototypeTextures/PNG/Orange/texture_08.tres" id="2_73jbu"]
 [ext_resource type="Script" uid="uid://chqufperkix03" path="res://Script/Weapon/TurretController.cs" id="2_v6311"]
 [ext_resource type="Material" uid="uid://1socim47qhxu" path="res://Art/tankGunAlpha.tres" id="2_ydpxq"]
 [ext_resource type="Script" uid="uid://bw8e2f22ssydd" path="res://Script/Player/PlayerInventory.cs" id="3_ydpxq"]
@@ -27,7 +28,7 @@ height = 0.1
 
 [node name="Warthog" type="Node3D" unique_id=1653131424]
 
-[node name="WarthogBody3D" type="VehicleBody3D" parent="." unique_id=481016929 node_paths=PackedStringArray("FrontLeftWheel", "RearLeftWheel", "FrontRightWheel", "RearRightWheel")]
+[node name="WarthogBody3D" type="VehicleBody3D" parent="." unique_id=481016929 node_paths=PackedStringArray("FrontLeftWheel", "RearLeftWheel", "FrontRightWheel", "RearRightWheel") groups=["player"]]
 collision_mask = 14
 mass = 200.0
 center_of_mass_mode = 1
@@ -48,6 +49,7 @@ MaxSpeed = 60.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WarthogBody3D" unique_id=309705436]
 mesh = SubResource("BoxMesh_qhabs")
+surface_material_override/0 = ExtResource("2_73jbu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WarthogBody3D" unique_id=123669687]
 shape = SubResource("BoxShape3D_xifw6")
@@ -96,7 +98,7 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0
 mesh = SubResource("CylinderMesh_jkqao")
 
 [node name="TurretPivot" type="Node3D" parent="WarthogBody3D" unique_id=1905930771 node_paths=PackedStringArray("CameraPivot", "TurretPivot", "BarrelPivot")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19513702, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19513702, 0.64233685)
 script = ExtResource("2_v6311")
 CameraPivot = NodePath("../../CameraPivot")
 TurretPivot = NodePath(".")
