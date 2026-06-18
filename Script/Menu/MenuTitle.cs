@@ -7,6 +7,8 @@ public partial class MenuTitle : Node
     {
         Button playButton = GetNode<Button>("PlayButton"); //name of button in scene
         playButton.Pressed += OnStartButtonPressed;
+
+        SoundManager.Instance.PlayMenuMusic();
     }
 
     private void OnStartButtonPressed()

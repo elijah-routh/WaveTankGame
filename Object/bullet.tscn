@@ -5,9 +5,11 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_iutib"]
 material = ExtResource("1_74w4f")
+radius = 1.0
+height = 2.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ufrha"]
-size = Vector3(0.8, 0.8, 0.8)
+size = Vector3(1.6, 1.6, 1.6)
 
 [node name="Bullet" type="Area3D" unique_id=1308113529]
 collision_layer = 128

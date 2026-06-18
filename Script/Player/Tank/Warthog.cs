@@ -8,6 +8,9 @@ public partial class Warthog : VehicleBody3D
     [Export] public VehicleWheel3D FrontRightWheel;
     [Export] public VehicleWheel3D RearRightWheel;
 
+    [ExportGroup("Components")]
+    [Export] public BoostComponent Boost;
+
     [ExportGroup("Steering")]
     [Export] public float MaxSteerAngle = 0.6f;
     [Export] public float SteerSpeed = 10.0f;
@@ -57,6 +60,9 @@ public partial class Warthog : VehicleBody3D
         AngularDamp = AngularDamping;
 
         ApplyWheelSettings();
+
+        if (Boost == null)
+            Boost = GetNodeOrNull<BoostComponent>("BoostComponent");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -69,8 +75,17 @@ public partial class Warthog : VehicleBody3D
         _steerInput =
             Input.GetAxis("move_right", "move_left");
 
-        UpdateDamping();
-        HandleEngineForce();
+        bool hasGroundContact = HasGroundContact();
+
+        UpdateDamping(hasGroundContact);
+
+        Boost?.Tick(
+            physicsDelta,
+            _throttle,
+            hasGroundContact
+        );
+
+        HandleEngineForce(hasGroundContact);
         HandleSteering(physicsDelta);
         ApplySideGrip();
     }
@@ -87,9 +102,9 @@ public partial class Warthog : VehicleBody3D
         }
     }
 
-    private void UpdateDamping()
+    private void UpdateDamping(bool hasGroundContact)
     {
-        if (HasGroundContact())
+        if (hasGroundContact)
         {
             LinearDamp = GroundLinearDamping;
             AngularDamp = GroundAngularDamping;
@@ -101,20 +116,31 @@ public partial class Warthog : VehicleBody3D
         }
     }
 
-    private void HandleEngineForce()
+    private void HandleEngineForce(bool hasGroundContact)
     {
-        if (!HasGroundContact())
+        if (!hasGroundContact)
             return;
 
+        float currentAcceleration = Acceleration;
+        float currentMaxSpeed = MaxSpeed;
+
+        if (Boost != null)
+        {
+            currentAcceleration = Boost.GetAcceleration(currentAcceleration);
+            currentMaxSpeed = Boost.GetMaxSpeed(currentMaxSpeed);
+        }
+
+        Vector3 forward = GetForwardDirection();
+
         float speed =
-            Mathf.Abs(LinearVelocity.Dot(GetForwardDirection()));
+            Mathf.Abs(LinearVelocity.Dot(forward));
 
         float speedFactor =
-            1.0f - Mathf.Min(speed / MaxSpeed, 1.0f);
+            1.0f - Mathf.Min(speed / currentMaxSpeed, 1.0f);
 
         Vector3 force =
-            GetForwardDirection() *
-            Acceleration *
+            forward *
+            currentAcceleration *
             _throttle *
             speedFactor;
 
@@ -199,7 +225,12 @@ public partial class Warthog : VehicleBody3D
     private bool HasGroundContact()
     {
         return
-            RearLeftWheel.IsInContact() ||
-            RearRightWheel.IsInContact();
+            IsWheelGrounded(RearLeftWheel) ||
+            IsWheelGrounded(RearRightWheel);
+    }
+
+    private bool IsWheelGrounded(VehicleWheel3D wheel)
+    {
+        return wheel != null && wheel.IsInContact();
     }
 }

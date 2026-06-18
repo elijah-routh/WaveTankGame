@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bup2b7ptt64kl"]
 
 [ext_resource type="PackedScene" uid="uid://bx6yb7u7qv0cb" path="res://Object/block.tscn" id="1_nm00w"]
-[ext_resource type="PackedScene" uid="uid://bk6vsvvvq2041" path="res://Scene/hud.tscn" id="3_jqghn"]
-[ext_resource type="PackedScene" uid="uid://bbdhynmtewp4j" path="res://Scene/menu_pause.tscn" id="4_yh8nw"]
+[ext_resource type="PackedScene" uid="uid://bk6vsvvvq2041" path="res://Scene/Menu/hud.tscn" id="3_jqghn"]
+[ext_resource type="PackedScene" uid="uid://bbdhynmtewp4j" path="res://Scene/Menu/menu_pause.tscn" id="4_yh8nw"]
 [ext_resource type="PackedScene" uid="uid://d0rhomlily6un" path="res://Object/star.tscn" id="5_ttjy2"]
 [ext_resource type="PackedScene" uid="uid://bcpcyrk5h032x" path="res://warthog.tscn" id="6_aafx7"]
 [ext_resource type="PackedScene" uid="uid://dxsevhhuvx4u" path="res://Object/enemy.tscn" id="6_pg68k"]

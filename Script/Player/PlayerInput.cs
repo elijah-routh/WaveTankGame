@@ -26,4 +26,7 @@ public static class PlayerInput
 
     public static bool ShootPressed =>
         Input.IsActionPressed("shoot");
+
+    public static bool BoostPressed =>
+        Input.IsActionPressed("boost");
 }

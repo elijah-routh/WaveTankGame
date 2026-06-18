@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bw8e2f22ssydd" path="res://Script/Player/PlayerInventory.cs" id="3_ydpxq"]
 [ext_resource type="Script" uid="uid://chmvkchg48xg7" path="res://Script/Weapon/WeaponController.cs" id="4_v6311"]
 [ext_resource type="Resource" uid="uid://co8x08kedqq8o" path="res://Script/Weapon/Data/TestTurret.tres" id="5_73jbu"]
+[ext_resource type="Script" uid="uid://b0djdbskxxhsb" path="res://Script/Player/Tank/BoostComponent.cs" id="9_jvr51"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qhabs"]
 size = Vector3(1.5, 1, 2.5)
@@ -28,7 +29,7 @@ height = 0.1
 
 [node name="Warthog" type="Node3D" unique_id=1653131424]
 
-[node name="WarthogBody3D" type="VehicleBody3D" parent="." unique_id=481016929 node_paths=PackedStringArray("FrontLeftWheel", "RearLeftWheel", "FrontRightWheel", "RearRightWheel") groups=["player"]]
+[node name="WarthogBody3D" type="VehicleBody3D" parent="." unique_id=481016929 node_paths=PackedStringArray("FrontLeftWheel", "RearLeftWheel", "FrontRightWheel", "RearRightWheel", "Boost") groups=["player"]]
 collision_mask = 14
 mass = 200.0
 center_of_mass_mode = 1
@@ -43,6 +44,7 @@ FrontLeftWheel = NodePath("LeftWheel")
 RearLeftWheel = NodePath("LeftWheel3")
 FrontRightWheel = NodePath("RightWheel")
 RearRightWheel = NodePath("RightWheel3")
+Boost = NodePath("../BoostComponent")
 SuspensionStiffness = 50.0
 Acceleration = 5000.0
 MaxSpeed = 60.0
@@ -143,3 +145,8 @@ script = ExtResource("3_ydpxq")
 script = ExtResource("4_v6311")
 CurrentWeapon = ExtResource("5_73jbu")
 Barrel = NodePath("../WarthogBody3D/TurretPivot/MeshInstance3D/BarrelPivot/MeshInstance3D/Barrel")
+
+[node name="BoostComponent" type="Node" parent="." unique_id=64884975]
+script = ExtResource("9_jvr51")
+RequireGrounded = false
+RequireForwardThrottle = false
