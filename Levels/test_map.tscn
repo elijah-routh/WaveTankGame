@@ -728,6 +728,9 @@ Camera = NodePath("../../Warthog/CameraPivot/SpringArm3D/Camera3D")
 [node name="Warthog" parent="." unique_id=1653131424 instance=ExtResource("21_54axq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.340997, 1.3511219, -87.929535)
 
+[node name="WarthogBody3D" parent="Warthog" index="0" unique_id=481016929 node_paths=PackedStringArray("HealthBar")]
+HealthBar = NodePath("../../HUD/HealthBar")
+
 [node name="Kaiju" parent="." unique_id=773946387 instance=ExtResource("22_xjovg")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 108.89442, 21.192207, 8.356667)
 

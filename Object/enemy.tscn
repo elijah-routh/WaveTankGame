@@ -44,6 +44,7 @@ script = ExtResource("2_wg2dq")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=839736057]
 script = ExtResource("3_c6j6f")
+DestroyOwnerOnDeath = true
 
 [node name="EnemyController" type="Node" parent="." unique_id=309207712 node_paths=PackedStringArray("LaserBarrel")]
 script = ExtResource("4_46ks3")

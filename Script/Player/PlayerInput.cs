@@ -29,4 +29,7 @@ public static class PlayerInput
 
     public static bool BoostPressed =>
         Input.IsActionPressed("boost");
+
+    public static bool DamagePressed =>
+        Input.IsActionJustPressed("debug_damage");
 }

@@ -10,35 +10,29 @@ namespace Game.Components
         [Signal] public delegate void HealedEventHandler(float amount);
         [Signal] public delegate void DiedEventHandler();
 
-        public float MaxHealth { get; private set; }
-        public float CurrentHealth { get; private set; }
+        [Export] public float MaxHealth { get; private set; } = 100f;
         [Export] public bool DestroyOwnerOnDeath { get; private set; } = false;
+
+        public float CurrentHealth { get; private set; }
         public bool IsDead { get; private set; }
 
         public override void _Ready()
         {
-            CurrentHealth = MaxHealth;
-            EmitSignal(SignalName.HealthChanged, CurrentHealth, MaxHealth);
+            ResetHealth();
         }
 
         public void Initialize(float maxHealth)
         {
             MaxHealth = maxHealth;
-            CurrentHealth = MaxHealth;
-            IsDead = false;
-
-            EmitSignal(SignalName.HealthChanged, CurrentHealth, MaxHealth);
+            ResetHealth();
         }
 
         public void TakeDamage(float damage)
         {
-            GD.Print($"HealthComp take damage");
-
             if (IsDead || damage <= 0f)
                 return;
 
             CurrentHealth = Mathf.Max(CurrentHealth - damage, 0f);
-            GD.Print(CurrentHealth);
 
             EmitSignal(SignalName.Damaged, damage);
             EmitSignal(SignalName.HealthChanged, CurrentHealth, MaxHealth);

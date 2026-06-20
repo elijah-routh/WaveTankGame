@@ -1,15 +1,22 @@
 using Godot;
+using Game.Components;
+using Game.Entity;
 
-public partial class Warthog : VehicleBody3D
+public partial class Warthog : VehicleBody3D, IDamageable, IHealable, IKillable
 {
+    [ExportGroup("Components")]
+    [Export] public BoostComponent Boost;
+    [Export] public HealthComponent Health;
+    [Export] public HealthBar HealthBar;
+
+    [ExportGroup("Health")]
+    [Export] public float StartingHealth = 100f;
+    
     [ExportGroup("Wheels")]
     [Export] public VehicleWheel3D FrontLeftWheel;
     [Export] public VehicleWheel3D RearLeftWheel;
     [Export] public VehicleWheel3D FrontRightWheel;
     [Export] public VehicleWheel3D RearRightWheel;
-
-    [ExportGroup("Components")]
-    [Export] public BoostComponent Boost;
 
     [ExportGroup("Steering")]
     [Export] public float MaxSteerAngle = 0.6f;
@@ -43,6 +50,10 @@ public partial class Warthog : VehicleBody3D
 
     private VehicleWheel3D[] _wheels;
 
+    [ExportGroup("Debug")]
+    [Export] public float DebugDamageAmount = 10f;
+
+
     public override void _Ready()
     {
         _wheels =
@@ -63,6 +74,25 @@ public partial class Warthog : VehicleBody3D
 
         if (Boost == null)
             Boost = GetNodeOrNull<BoostComponent>("BoostComponent");
+
+        if (Health == null)
+            Health = GetNodeOrNull<HealthComponent>("HealthComponent");
+
+        if (HealthBar == null)
+            HealthBar = GetNodeOrNull<HealthBar>("HealthBar");
+
+        if (Health != null)
+        {
+            Health.HealthChanged += OnHealthChanged;
+            Health.Died += OnDied;
+
+            Health.Initialize(StartingHealth);
+        }
+
+        if (HealthBar != null)
+        {
+            HealthBar.InitHealth(StartingHealth);
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -88,6 +118,11 @@ public partial class Warthog : VehicleBody3D
         HandleEngineForce(hasGroundContact);
         HandleSteering(physicsDelta);
         ApplySideGrip();
+
+        if (PlayerInput.DamagePressed)
+        {
+            Health?.TakeDamage(DebugDamageAmount);
+        }
     }
 
     private void ApplyWheelSettings()
@@ -232,5 +267,40 @@ public partial class Warthog : VehicleBody3D
     private bool IsWheelGrounded(VehicleWheel3D wheel)
     {
         return wheel != null && wheel.IsInContact();
+    }
+
+    private void OnHealthChanged(float currentHealth, float maxHealth)
+    {
+        if (HealthBar == null)
+            return;
+
+        HealthBar.MaxValue = maxHealth;
+        HealthBar.Health = currentHealth;
+    }
+
+    private void OnDied()
+    {
+        GD.Print("Warthog destroyed");
+
+        // Optional:
+        // QueueFree();
+        // Disable driving.
+        // Play explosion.
+        // Start respawn timer.
+    }
+
+    public void TakeDamage(float damage)
+    {
+        Health?.TakeDamage(damage);
+    }
+
+    public void Heal(float amount)
+    {
+        Health?.Heal(amount);
+    }
+
+    public void Kill()
+    {
+        Health?.Kill();
     }
 }
