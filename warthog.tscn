@@ -128,6 +128,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 transform = Transform3D(1, 0, 0, 0, 0.91363764, -0.40652943, 0, 0.40652943, 0.91363764, 0, 0, 0)
 script = ExtResource("2_55fhy")
 Target = NodePath("../WarthogBody3D")
+Offset = Vector3(0, 2.5, 0)
 SpringArm = NodePath("SpringArm3D")
 MinSpringLength = 5.0
 
